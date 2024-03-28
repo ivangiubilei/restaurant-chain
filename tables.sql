@@ -70,7 +70,8 @@ CREATE TABLE Offers (
     points INT NOT NULL, 
     description VARCHAR (255),
     ending_date DATE,
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
+    PRIMARY KEY (offers_id)
 );
 
 -- Insert
