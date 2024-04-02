@@ -18,7 +18,7 @@ CREATE TABLE Employee (
     employment_date DATE NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
     primary key(employee_id),
-    CHECK (rank in ('director', 'chef', 'sous-chef', 'cooks', 'maitre', 'head-maitre', 'waiter', 'barman', 'cleaner'))
+    CHECK (rank in ('CEO', 'director', 'chef', 'maitre', 'head-maitre', 'waiter', 'barman', 'cleaner'))
 );
 
 CREATE TABLE Supplier (
