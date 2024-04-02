@@ -137,6 +137,21 @@ VALUES (19, 4, 'Emma', 'Sanchez', 'sous-chef', TO_DATE('1975-12-08', 'YYYY-MM-DD
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
 VALUES (20, 8, 'William', 'Gonzalez', 'waiter', TO_DATE('1990-02-17', 'YYYY-MM-DD'), 'william.gonzalez@email.com', TO_DATE('2022-04-30', 'YYYY-MM-DD'));
 
+INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
+VALUES (21, 1, 'John', 'Smith', 'barman', TO_DATE('1990-03-15', 'YYYY-MM-DD'), 'john.smith@email.com', TO_DATE('2023-04-02', 'YYYY-MM-DD'));
+
+INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
+VALUES (22, 2, 'Emma', 'Johnson', 'barman', TO_DATE('1992-05-20', 'YYYY-MM-DD'), 'emma.johnson@email.com', TO_DATE('2022-08-10', 'YYYY-MM-DD'));
+
+INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
+VALUES (23, 3, 'William', 'Williams', 'barman', TO_DATE('1988-12-10', 'YYYY-MM-DD'), 'william.williams@email.com', TO_DATE('2024-01-05', 'YYYY-MM-DD'));
+
+INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
+VALUES (24, 4, 'Olivia', 'Jones', 'barman', TO_DATE('1995-08-25', 'YYYY-MM-DD'), 'olivia.jones@email.com', TO_DATE('2023-09-20', 'YYYY-MM-DD'));
+
+INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
+VALUES (25, 5, 'James', 'Brown', 'barman', TO_DATE('1991-04-03', 'YYYY-MM-DD'), 'james.brown@email.com', TO_DATE('2022-11-15', 'YYYY-MM-DD'));
+
 -- Suppliers
 INSERT INTO Supplier (supplier_id, supply_type, company, name, surname, email)
 VALUES (1, 'Produce', 'Fresh Harvest Farms', 'John','Miller', 'miller@freshharvestfarms.com');
