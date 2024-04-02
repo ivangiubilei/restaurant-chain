@@ -87,13 +87,13 @@ INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday,
 VALUES (3, 2, 'Isabella', 'Garcia', 'maitre', TO_DATE('1992-10-24', 'YYYY-MM-DD'), 'isabella.garcia@email.com', TO_DATE('2020-12-01', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (4, 2, 'David', 'Miller', 'sous-chef', TO_DATE('1982-01-10', 'YYYY-MM-DD'), 'david.miller@email.com', TO_DATE('2019-08-20', 'YYYY-MM-DD'));
+VALUES (4, 2, 'David', 'Miller', 'CEO', TO_DATE('1982-01-10', 'YYYY-MM-DD'), 'david.miller@email.com', TO_DATE('2019-08-20', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
 VALUES (5, 3, 'Emily', 'Walker', 'waiter', TO_DATE('1995-05-18', 'YYYY-MM-DD'), 'emily.walker@email.com', TO_DATE('2023-01-16', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (6, 3, 'Noah', 'Jackson', 'cooks', TO_DATE('1997-02-06', 'YYYY-MM-DD'), 'noah.jackson@email.com', TO_DATE('2024-02-01', 'YYYY-MM-DD'));
+VALUES (6, 3, 'Noah', 'Jackson', 'maitre', TO_DATE('1997-02-06', 'YYYY-MM-DD'), 'noah.jackson@email.com', TO_DATE('2024-02-01', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
 VALUES (7, 4, 'Charlotte', 'Davies', 'director', TO_DATE('1968-08-15', 'YYYY-MM-DD'), 'charlotte.davies@email.com', TO_DATE('2010-01-04', 'YYYY-MM-DD'));
@@ -105,10 +105,10 @@ INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday,
 VALUES (9, 5, 'Christopher', 'Clark', 'cleaner', TO_DATE('1988-06-09', 'YYYY-MM-DD'), 'christopher.clark@email.com', TO_DATE('2022-11-21', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (10, 13, 'Amelia', 'Moore', 'cooks', TO_DATE('2000-10-27', 'YYYY-MM-DD'), 'amelia.moore@email.com', TO_DATE('2023-09-05', 'YYYY-MM-DD'));
+VALUES (10, 13, 'Amelia', 'Moore', 'director', TO_DATE('2000-10-27', 'YYYY-MM-DD'), 'amelia.moore@email.com', TO_DATE('2023-09-05', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (11, 15, 'Sophia', 'Wilson', 'chef', TO_DATE('1985-04-10', 'YYYY-MM-DD'), 'sophia.wilson@email.com', TO_DATE('2010-09-15', 'YYYY-MM-DD'));
+VALUES (11, 15, 'Sophia', 'Wilson', 'CEO', TO_DATE('1985-04-10', 'YYYY-MM-DD'), 'sophia.wilson@email.com', TO_DATE('2010-09-15', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
 VALUES (12, 12, 'Ethan', 'Harris', 'waiter', TO_DATE('1994-12-28', 'YYYY-MM-DD'), 'ethan.harris@email.com', TO_DATE('2023-03-08', 'YYYY-MM-DD'));
@@ -117,7 +117,7 @@ INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday,
 VALUES (13, 14, 'Mia', 'Campbell', 'cleaner', TO_DATE('1982-07-17', 'YYYY-MM-DD'), 'mia.campbell@email.com', TO_DATE('2015-11-20', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (14, 9, 'James', 'Parker', 'sous-chef', TO_DATE('1978-03-25', 'YYYY-MM-DD'), 'james.parker@email.com', TO_DATE('2008-06-30', 'YYYY-MM-DD'));
+VALUES (14, 9, 'James', 'Parker', 'CEO', TO_DATE('1978-03-25', 'YYYY-MM-DD'), 'james.parker@email.com', TO_DATE('2008-06-30', 'YYYY-MM-DD'));
 
 INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
 VALUES (15, 10, 'Olivia', 'Evans', 'waiter', TO_DATE('1999-08-12', 'YYYY-MM-DD'), 'olivia.evans@email.com', TO_DATE('2024-01-10', 'YYYY-MM-DD'));
