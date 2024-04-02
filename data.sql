@@ -30,21 +30,6 @@ VALUES (9, 4567890123, 'Fast Food Street 10', 'Burgers, Fries');
 INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
 VALUES (10, 5678901234, 'Quick Bite Alley 20', 'Sandwiches, Wraps');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (11, 6789012345, 'Rapid Eats Boulevard 30', 'Pizza, Wings');
-
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (12, 7890123456, 'Green Avenue 40', 'Vegetarian, Vegan');
-
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (13, 8901234567, 'Organic Lane 50', 'Vegetarian, Salads');
-
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (14, 9012345678, 'Plant-Based Road 60', 'Vegetarian, Smoothies');
-
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (15, 3920475822, 'Via del Corso 10', 'Mexican');
-
 -- Clients 
 INSERT INTO Client (client_id, name, surname, email, birthday, password)
 VALUES (1, 'David', 'Lee', 'david.lee@email.com', TO_DATE('1978-03-09', 'YYYY-MM-DD'), 'Secret_password11');
