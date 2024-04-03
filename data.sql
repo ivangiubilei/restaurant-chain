@@ -1,34 +1,42 @@
 -- Insert
+-- Chains
+INSERT INTO Chain (name, phone_number, address)
+VALUES ('Italobros', 2483927114, 'Main Street 101');
+INSERT INTO Chain (name, phone_number, address)
+VALUES ('Planeinos Goodos', 5555555555, '180 Greenwich Street, New York');
+INSERT INTO Chain (name, phone_number, address)
+VALUES ('AriGatto', 4582154632, '507 N Eastgate Dr, Goldsboro');
+
 -- Restaurants --
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (1, 2483927114, 'Main Street 101', 'Italian, Seafood');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (1, 2483927114, 'Main Street 101', 'Italobros', 'Italian, Seafood');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (2, 840072291, 'Elm Street 202', 'French, Asian');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (2, 840072291, 'Elm Street 202', 'AriGatto', 'Asian');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (3, 2078943320, 'Park Avenue 303', 'American, Mexican');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (3, 2078943320, 'Park Avenue 303', 'Planeinos Goodos', 'American, Mexican');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (4, 9176619001, 'Beach Road 404', 'Mediterranean, Vegetarian');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (4, 9176619001, 'Beach Road 404', 'AriGatto', 'Asian');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (5, 1315634974, 'Hilltop Lane 505', 'Indian, Thai');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (5, 1315634974, 'Hilltop Lane 505', 'AriGatto', 'Asian');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (6, 1234567890, 'Via Roma 1', 'Italian');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (6, 1234567890, 'Via Roma 1', 'Italobros', 'Italian, Seafood');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (7, 2345678901, 'Via Dante 2', 'Italian');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (7, 2345678901, 'Via Dante 2', 'Italobros', 'Italian, Seafood');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (8, 3456789012, 'Corso Vittorio Emanuele 3', 'Italian');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (8, 3456789012, 'Corso Vittorio Emanuele 3', 'Italobros', 'Italian, Seafood');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (9, 4567890123, 'Fast Food Street 10', 'Burgers, Fries');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (9, 4567890123, 'Fast Food Street 10', 'Planeinos Goodos', 'American, Mexican');
 
-INSERT INTO Restaurant (restaurant_id, phone_number, address, offers) 
-VALUES (10, 5678901234, 'Quick Bite Alley 20', 'Sandwiches, Wraps');
+INSERT INTO Restaurant (restaurant_id, phone_number, address, chain_name, offers) 
+VALUES (10, 5678901234, 'Quick Bite Alley 20', 'AriGatto', 'Asian');
 
 -- Clients 
 INSERT INTO Client (client_id, name, surname, email, birthday, password)
@@ -76,82 +84,6 @@ VALUES (14, 'Olivia', 'Esposito', 'olivia.smith@email.com', TO_DATE('1986-02-28'
 INSERT INTO Client (client_id, name, surname, email, birthday, password)
 VALUES (15, 'Daniele', 'Verdi', 'daniel.taylor@email.com', TO_DATE('1990-09-15', 'YYYY-MM-DD'), 'Secret_password11');
 
--- Employees
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (1, 1, 'Sarah', 'Jones', 'waiter', TO_DATE('1985-07-12', 'YYYY-MM-DD'), 'sarah.jones@email.com', TO_DATE('2022-06-15', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (2, 1, 'Michael', 'Chen', 'chef', TO_DATE('1978-03-21', 'YYYY-MM-DD'), 'michael.chen@email.com', TO_DATE('2018-05-09', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (3, 2, 'Isabella', 'Garcia', 'maitre', TO_DATE('1992-10-24', 'YYYY-MM-DD'), 'isabella.garcia@email.com', TO_DATE('2020-12-01', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (4, 2, 'David', 'Miller', 'CEO', TO_DATE('1982-01-10', 'YYYY-MM-DD'), 'david.miller@email.com', TO_DATE('2019-08-20', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (5, 3, 'Emily', 'Walker', 'waiter', TO_DATE('1995-05-18', 'YYYY-MM-DD'), 'emily.walker@email.com', TO_DATE('2023-01-16', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (6, 3, 'Noah', 'Jackson', 'maitre', TO_DATE('1997-02-06', 'YYYY-MM-DD'), 'noah.jackson@email.com', TO_DATE('2024-02-01', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (7, 4, 'Charlotte', 'Davies', 'director', TO_DATE('1968-08-15', 'YYYY-MM-DD'), 'charlotte.davies@email.com', TO_DATE('2010-01-04', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (8, 11, 'Daniel', 'Robinson', 'director', TO_DATE('1965-02-22', 'YYYY-MM-DD'), 'daniel.robinson@email.com', TO_DATE('2005-07-19', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (9, 5, 'Christopher', 'Clark', 'cleaner', TO_DATE('1988-06-09', 'YYYY-MM-DD'), 'christopher.clark@email.com', TO_DATE('2022-11-21', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (10, 13, 'Amelia', 'Moore', 'director', TO_DATE('2000-10-27', 'YYYY-MM-DD'), 'amelia.moore@email.com', TO_DATE('2023-09-05', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (11, 15, 'Sophia', 'Wilson', 'CEO', TO_DATE('1985-04-10', 'YYYY-MM-DD'), 'sophia.wilson@email.com', TO_DATE('2010-09-15', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (12, 12, 'Ethan', 'Harris', 'waiter', TO_DATE('1994-12-28', 'YYYY-MM-DD'), 'ethan.harris@email.com', TO_DATE('2023-03-08', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (13, 14, 'Mia', 'Campbell', 'cleaner', TO_DATE('1982-07-17', 'YYYY-MM-DD'), 'mia.campbell@email.com', TO_DATE('2015-11-20', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (14, 9, 'James', 'Parker', 'CEO', TO_DATE('1978-03-25', 'YYYY-MM-DD'), 'james.parker@email.com', TO_DATE('2008-06-30', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (15, 10, 'Olivia', 'Evans', 'waiter', TO_DATE('1999-08-12', 'YYYY-MM-DD'), 'olivia.evans@email.com', TO_DATE('2024-01-10', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (16, 15, 'Liam', 'Turner', 'chef',  TO_DATE('1986-09-03', 'YYYY-MM-DD'), 'liam.turner@email.com', TO_DATE('2012-05-15', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (17, 13, 'Ava', 'Stewart', 'waiter', TO_DATE('1997-11-20', 'YYYY-MM-DD'), 'ava.stewart@email.com', TO_DATE('2023-07-18', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (18, 1, 'Noah', 'Perez', 'cleaner', TO_DATE('1980-05-14', 'YYYY-MM-DD'), 'noah.perez@email.com', TO_DATE('2017-09-22', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (19, 4, 'Emma', 'Sanchez', 'sous-chef', TO_DATE('1975-12-08', 'YYYY-MM-DD'), 'emma.sanchez@email.com', TO_DATE('2009-11-05', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (20, 8, 'William', 'Gonzalez', 'waiter', TO_DATE('1990-02-17', 'YYYY-MM-DD'), 'william.gonzalez@email.com', TO_DATE('2022-04-30', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (21, 1, 'John', 'Smith', 'barman', TO_DATE('1990-03-15', 'YYYY-MM-DD'), 'john.smith@email.com', TO_DATE('2023-04-02', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (22, 2, 'Emma', 'Johnson', 'barman', TO_DATE('1992-05-20', 'YYYY-MM-DD'), 'emma.johnson@email.com', TO_DATE('2022-08-10', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (23, 3, 'William', 'Williams', 'barman', TO_DATE('1988-12-10', 'YYYY-MM-DD'), 'william.williams@email.com', TO_DATE('2024-01-05', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (24, 4, 'Olivia', 'Jones', 'barman', TO_DATE('1995-08-25', 'YYYY-MM-DD'), 'olivia.jones@email.com', TO_DATE('2023-09-20', 'YYYY-MM-DD'));
-
-INSERT INTO Employee (employee_id, restaurant_id, name, surname, rank, birthday, email, employment_date)
-VALUES (25, 5, 'James', 'Brown', 'barman', TO_DATE('1991-04-03', 'YYYY-MM-DD'), 'james.brown@email.com', TO_DATE('2022-11-15', 'YYYY-MM-DD'));
-
 -- Suppliers
 INSERT INTO Supplier (supplier_id, supply_type, company, name, surname, email)
 VALUES (1, 'Produce', 'Fresh Harvest Farms', 'John','Miller', 'miller@freshharvestfarms.com');
@@ -182,6 +114,7 @@ VALUES (9, 'Seafood', 'Fresh Catch', 'Michael', 'Wang', 'wang@freashcatch.com');
 
 INSERT INTO Supplier (supplier_id, supply_type, company, name, surname, email)
 VALUES (10, 'Cleaning Supplies', 'EcoShine Products', 'Armando', 'Jones', 'jones@ecoshineproducts.com');
+
 
 -- SHIPMENTS
 INSERT INTO Shipment (shipment_id, restaurant_id, supplier_id, product_name, amount, product_type) 
@@ -245,7 +178,7 @@ INSERT INTO Shipment (shipment_id, restaurant_id, supplier_id, product_name, amo
 VALUES (20, 1, 1, 'Tomatoes', 100, 'Vegetables');
 
 INSERT INTO Shipment (shipment_id, restaurant_id, supplier_id, product_name, amount, product_type)
-VALUES (21, 11, 9, 'Salmon Fillets', 25, 'Seafood');
+VALUES (21, 10, 9, 'Salmon Fillets', 25, 'Seafood');
 
 INSERT INTO Shipment (shipment_id, restaurant_id, supplier_id, product_name, amount, product_type)
 VALUES (22, 4, 7, 'Baguettes', 40, 'Bread');
@@ -254,10 +187,86 @@ INSERT INTO Shipment (shipment_id, restaurant_id, supplier_id, product_name, amo
 VALUES (23, 9, 6, 'Beef Tenderloin', 30, 'Meat');
 
 INSERT INTO Shipment (shipment_id, restaurant_id, supplier_id, product_name, amount, product_type)
-VALUES (24, 14, 8, 'Lemons', 50, 'Fruit');
+VALUES (24, 4, 8, 'Lemons', 50, 'Fruit');
 
 INSERT INTO Shipment (shipment_id, restaurant_id, supplier_id, product_name, amount, product_type)
-VALUES (25, 12, 8, 'Tomatoes', 20, 'Vegetables');
+VALUES (25, 2, 8, 'Tomatoes', 20, 'Vegetables');
+
+-- Employees
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (1, 'Sarah', 'Jones', TO_DATE('1985-07-12', 'YYYY-MM-DD'), 'sarah.jones@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (2, 'Michael', 'Chen', TO_DATE('1978-03-21', 'YYYY-MM-DD'), 'michael.chen@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (3, 'Isabella', 'Garcia', TO_DATE('1992-10-24', 'YYYY-MM-DD'), 'isabella.garcia@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (4, 'David', 'Miller', TO_DATE('1982-01-10', 'YYYY-MM-DD'), 'david.miller@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (5, 'Emily', 'Walker', TO_DATE('1995-05-18', 'YYYY-MM-DD'), 'emily.walker@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (6, 'Noah', 'Jackson', TO_DATE('1997-02-06', 'YYYY-MM-DD'), 'noah.jackson@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (7, 'Charlotte', 'Davies', TO_DATE('1968-08-15', 'YYYY-MM-DD'), 'charlotte.davies@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (8, 'Daniel', 'Robinson', TO_DATE('1965-02-22', 'YYYY-MM-DD'), 'daniel.robinson@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (9, 'Christopher', 'Clark', TO_DATE('1988-06-09', 'YYYY-MM-DD'), 'christopher.clark@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (10, 'Amelia', 'Moore', TO_DATE('2000-10-27', 'YYYY-MM-DD'), 'amelia.moore@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (11, 'Sophia', 'Wilson', TO_DATE('1985-04-10', 'YYYY-MM-DD'), 'sophia.wilson@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (12, 'Ethan', 'Harris', TO_DATE('1994-12-28', 'YYYY-MM-DD'), 'ethan.harris@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (13, 'Mia', 'Campbell', TO_DATE('1982-07-17', 'YYYY-MM-DD'), 'mia.campbell@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (14, 'James', 'Parker', TO_DATE('1978-03-25', 'YYYY-MM-DD'), 'james.parker@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (15, 'Olivia', 'Evans', TO_DATE('1999-08-12', 'YYYY-MM-DD'), 'olivia.evans@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (16, 'Liam', 'Turner',  TO_DATE('1986-09-03', 'YYYY-MM-DD'), 'liam.turner@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (17, 'Ava', 'Stewart', TO_DATE('1997-11-20', 'YYYY-MM-DD'), 'ava.stewart@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (18, 'Noah', 'Perez', TO_DATE('1980-05-14', 'YYYY-MM-DD'), 'noah.perez@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (19, 'Emma', 'Sanchez', TO_DATE('1975-12-08', 'YYYY-MM-DD'), 'emma.sanchez@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (20, 'William', 'Gonzalez', TO_DATE('1990-02-17', 'YYYY-MM-DD'), 'william.gonzalez@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (21, 'John', 'Smith', TO_DATE('1990-03-15', 'YYYY-MM-DD'), 'john.smith@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (22, 'Emma', 'Johnson', TO_DATE('1992-05-20', 'YYYY-MM-DD'), 'emma.johnson@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (23, 'William', 'Williams', TO_DATE('1988-12-10', 'YYYY-MM-DD'), 'william.williams@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (24, 'Olivia', 'Jones', TO_DATE('1995-08-25', 'YYYY-MM-DD'), 'olivia.jones@email.com');
+
+INSERT INTO Employee (employee_id, name, surname, birthday, email)
+VALUES (25, 'James', 'Brown', TO_DATE('1991-04-03', 'YYYY-MM-DD'), 'james.brown@email.com');
 
 -- Offers
 INSERT INTO Offers (offers_id, restaurant_id, starting_date, points, description, ending_date)
@@ -325,7 +334,7 @@ INSERT INTO Account (restaurant_id, client_id, frequency, points)
 VALUES (5, 5, 15, 4);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (14, 4, 7, 6);
+VALUES (4, 4, 7, 6);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
 VALUES (3, 3, 12, 6);
@@ -379,34 +388,86 @@ INSERT INTO Account (restaurant_id, client_id, frequency, points)
 VALUES (10, 14, 4, 57);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (11, 15, 6, 76);
+VALUES (1, 15, 6, 76);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (15, 1, 5, 40);
+VALUES (5, 1, 5, 40);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (13, 10, 3, 21);
+VALUES (3, 10, 3, 21);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (14, 3, 6, 56);
+VALUES (4, 3, 6, 56);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (13, 2, 7, 40);
+VALUES (3, 2, 7, 40);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
 VALUES (7, 12, 4, 38);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (14, 14, 3, 27);
+VALUES (4, 14, 3, 27);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (13, 7, 2, 11);
+VALUES (3, 7, 2, 11);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (12, 5, 6, 56);
+VALUES (2, 5, 6, 56);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
-VALUES (12, 2, 1, 3);
+VALUES (2, 2, 1, 3);
 
 INSERT INTO Account (restaurant_id, client_id, frequency, points)
 VALUES (2, 15, 4, 44);
+
+-- Employed
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (1, TO_DATE('2023-01-01', 'YYYY-MM-DD'), null, 1, 5, 'director', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (2, TO_DATE('2022-05-15', 'YYYY-MM-DD'), TO_DATE('2023-08-20', 'YYYY-MM-DD'), 2, 9, 'chef', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (3, TO_DATE('2021-11-10', 'YYYY-MM-DD'), null, 3, 2, 'maitre', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (4, TO_DATE('2024-02-20', 'YYYY-MM-DD'), TO_DATE('2024-03-31', 'YYYY-MM-DD'), 4, 7, 'head-maitre', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (5, TO_DATE('2023-09-08', 'YYYY-MM-DD'), null, 5, 4, 'waiter', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (6, TO_DATE('2022-07-03', 'YYYY-MM-DD'), null, 6, 1, 'barman', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (7, TO_DATE('2024-01-25', 'YYYY-MM-DD'), TO_DATE('2024-04-01', 'YYYY-MM-DD'), 7, 10, 'cleaner', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (8, TO_DATE('2022-12-12', 'YYYY-MM-DD'), null, 8, 3, 'director', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (9, TO_DATE('2023-05-30', 'YYYY-MM-DD'), null, 9, 6, 'chef', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (10, TO_DATE('2021-08-19', 'YYYY-MM-DD'), null, 10, 8, 'maitre', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (11, TO_DATE('2022-04-11', 'YYYY-MM-DD'), null, 11, 5, 'CEO', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (12, TO_DATE('2023-07-29', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'), 12, 9, 'waiter', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (13, TO_DATE('2024-03-05', 'YYYY-MM-DD'), null, 13, 2, 'barman', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (14, TO_DATE('2022-10-17', 'YYYY-MM-DD'), TO_DATE('2023-12-25', 'YYYY-MM-DD'), 14, 7, 'cleaner', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (15, TO_DATE('2023-03-22', 'YYYY-MM-DD'), null, 15, 4, 'director', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (16, TO_DATE('2022-01-09', 'YYYY-MM-DD'), null, 16, 1, 'chef', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (17, TO_DATE('2021-06-14', 'YYYY-MM-DD'), TO_DATE('2022-11-30', 'YYYY-MM-DD'), 17, 10, 'maitre', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (18, TO_DATE('2024-05-01', 'YYYY-MM-DD'), null, 18, 3, 'head-maitre', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (19, TO_DATE('2023-08-07', 'YYYY-MM-DD'), TO_DATE('2024-01-10', 'YYYY-MM-DD'), 19, 6, 'waiter', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (20, TO_DATE('2022-03-19', 'YYYY-MM-DD'), null, 20, 8, 'barman', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (21, TO_DATE('2021-09-28', 'YYYY-MM-DD'), null, 21, 5, 'CEO', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (22, TO_DATE('2022-12-03', 'YYYY-MM-DD'), null, 22, 9, 'director', 'Italobros');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (23, TO_DATE('2023-11-14', 'YYYY-MM-DD'), null, 23, 2, 'chef', 'Planeinos Goodos');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (24, TO_DATE('2021-12-30', 'YYYY-MM-DD'), TO_DATE('2023-02-28', 'YYYY-MM-DD'), 24, 7, 'maitre', 'AriGatto');
+INSERT INTO EMPLOYED (EMPLOYEMENT_ID, FROM_DATE, TO_DATE, EMPLOYEE_ID, RESTAURANT_ID, EMPLOYEE_ROLE, CHAIN_NAME)
+VALUES (25, TO_DATE('2024-04-02', 'YYYY-MM-DD'), null, 25, 10, 'CEO', 'Italobros');
