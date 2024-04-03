@@ -1,4 +1,3 @@
-
 -- Tables creation 
 CREATE TABLE Chain(
     name varchar(255),
@@ -36,6 +35,7 @@ CREATE TABLE Employed(
     chain_name varchar(255),
     primary key (employement_id),
     FOREIGN KEY (employee_id) REFERENCES Employee (employee_id),
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant (restaurant_id),
     CHECK (employee_role in ('CEO', 'director', 'chef', 'maitre', 'head-maitre', 'waiter', 'barman', 'cleaner')),
     FOREIGN KEY (chain_name) REFERENCES Chain (name)
     
