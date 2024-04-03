@@ -1,24 +1,44 @@
+
 -- Tables creation 
+CREATE TABLE Chain(
+    name varchar(255),
+    phone_number INT,
+    address VARCHAR(255),
+    primary key(name)
+);
+
 CREATE TABLE Restaurant(
     restaurant_id INT,
     phone_number INT NOT NULL,
     address VARCHAR(255) NOT NULL,
     offers VARCHAR(255),
-  primary key(restaurant_id)
+    chain_name varchar(255),
+    FOREIGN KEY (chain_name) REFERENCES Chain (name),
+    primary key(restaurant_id)
 );
 
 CREATE TABLE Employee (
     employee_id INT,
-    restaurant_id INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
-    rank VARCHAR(255) NOT NULL,
     birthday DATE,
     email VARCHAR(255) UNIQUE NOT NULL,
-    employment_date DATE NOT NULL,
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
-    primary key(employee_id),
-    CHECK (rank in ('CEO', 'director', 'chef', 'maitre', 'head-maitre', 'waiter', 'barman', 'cleaner'))
+    primary key(employee_id)
+);
+
+CREATE TABLE Employed(
+    employement_id INT,
+    from_date date not null,
+    to_date date,
+    employee_id INT not null,
+    restaurant_id int,
+    employee_role varchar(50),
+    chain_name varchar(255),
+    primary key (employement_id),
+    FOREIGN KEY (employee_id) REFERENCES Employee (employee_id),
+    CHECK (employee_role in ('CEO', 'director', 'chef', 'maitre', 'head-maitre', 'waiter', 'barman', 'cleaner')),
+    FOREIGN KEY (chain_name) REFERENCES Chain (name)
+    
 );
 
 CREATE TABLE Supplier (
@@ -38,8 +58,8 @@ CREATE TABLE Shipment (
     product_name VARCHAR(255) NOT NULL,
     amount INT NOT NULL,
     product_type VARCHAR(255),
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
-    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id) ,
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id) ,
     primary key (shipment_id)
 );
 
