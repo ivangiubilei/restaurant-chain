@@ -61,6 +61,14 @@ FROM Account
 WHERE RESTAURANT_ID = 1
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON account_restaurant_1 TO Sarah_Jones
+
+-- information to be granted to the head-maitre of a restaurant
+CREATE VIEW hmaitre_information_1 AS
+SELECT *
+FROM employed
+WHERE restaurant_id = 1 AND (employee_role = 'waiter' OR employee_role = 'barman' OR employee_role = 'cleaner' OR employee_role = 'maitre')
+
+GRANT SELECT ON hmaitre_information_1 TO David_Miller;
   
 -- information to be granted to a maitre of the first restaurant
 
@@ -71,24 +79,6 @@ WHERE RESTAURANT_ID = 1 AND (EMPLOYEE_ROLE = 'waiter' or EMPLOYEE_ROLE = 'barman
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON maitre_information_1 TO Liam_Turner
 
--- information to be granted to a cleaner of the first restaurant
-
-CREATE VIEW ADDRESS_RESTAURANT_1 AS
-SELECT ADDRESS, PHONE_NUMBER
-FROM RESTAURANT
-WHERE RESTAURANT_ID = 1
-
-GRANT SELECT, INSERT, UPDATE, DELETE ON address_restaurant_1 TO Charlotte_Davies 
-
--- information to be granted to a supplier of its shipment
-
-CREATE VIEW shipment_supplier_1 AS
-SELECT s.*
-FROM Shipment s
-WHERE s.SUPPLIER_ID = 1
-
-GRANT SELECT, INSERT, UPDATE, DELETE ON shipment_supplier_1 TO supplier_1
-
 -- information to be granted to the barman on the shipment which product type is the 'beverage'
 
 CREATE VIEW drink_shipment_1 AS
@@ -98,13 +88,23 @@ WHERE (product_type = 'Beverages') AND (RESTAURANT_ID = 1)
 
 GRANT SELECT ON drink_shipment_1 TO Noah_Jackson
 
--- information to be granted to the head-maitre of a restaurant
-CREATE VIEW hmaitre_information_1 AS
-SELECT *
-FROM employed
-WHERE restaurant_id = 1 AND (employee_role = 'waiter' OR employee_role = 'barman' OR employee_role = 'cleaner' OR employee_role = 'maitre')
+-- information to be granted to a cleaner of the first restaurant
 
-GRANT SELECT ON hmaitre_information_1 TO David_Miller;
+CREATE VIEW address_restaurant_1 AS
+SELECT address, phone_number
+FROM Restaurant
+WHERE restaurant_id = 1
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON address_restaurant_1 TO Charlotte_Davies 
+
+-- information to be granted to a supplier of its shipment
+
+CREATE VIEW shipment_supplier_1 AS
+SELECT s.*
+FROM Shipment s
+WHERE s.supplier_id = 1
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON shipment_supplier_1 TO supplier_1
 
 -- information to be granted of the different accounts based on the points
 
