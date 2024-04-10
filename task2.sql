@@ -106,20 +106,45 @@ WHERE s.supplier_id = 1
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON shipment_supplier_1 TO supplier_1
 
--- information to be granted of the different accounts based on the points
+-- information to be granted of the different accounts based on the points, three different type of offers: basic, pro, VIP
 
 CREATE VIEW offers_curr_bas_1 AS SELECT offers.*, trunc(current_date) AS current_date 
 FROM offers, dual  
 WHERE starting_date < current_date AND ending_date > current_date AND restaurant_id = 1 AND points>=30 AND points<50;
 
+GRANT SELECT ON offers_curr_bas_1 TO account1
+
 CREATE VIEW offers_curr_pro_1 AS SELECT offers.*, trunc(current_date) AS current_date 
 FROM offers, dual
 WHERE starting_date < current_date AND ending_date > current_date AND restaurant_id = 1 AND points>=50 AND points<70;
+
+GRANT SELECT ON offers_curr_pro_1 TO account1
 
 CREATE VIEW offers_curr_vip_1 AS SELECT offers.*, trunc(current_date) AS current_date 
 FROM offers, dual  
 WHERE starting_date < current_date AND ending_date > current_date AND restaurant_id = 1 AND points>=70;
 
-GRANT SELECT ON offers_curr_bas_1 TO account1
-GRANT SELECT ON offers_curr_pro_1 TO account1
 GRANT SELECT ON offers_curr_vip_1 TO account1
+        
+-- information to be granted on the available offers to a specific restaurant
+CREATE VIEW offers_restaurant_1 AS
+SELECT * 
+FROM OFFERS
+WHERE RESTAURANT_ID = 1
+
+-- information to be granted to the hmaitre of a restaurant
+CREATE VIEW hmaitre_information_1 AS
+SELECT *
+FROM employed
+WHERE restaurant_id = 1 AND (employee_role = 'waiter' OR employee_role = 'barman' OR employee_role = 'cleaner' OR employee_role = 'maitre')
+
+GRANT SELECT ON hmaitre_information_1 TO David_Miller;
+
+-- information to be granted on the available offers to a specific restaurant chain
+CREATE VIEW offers_arigatto AS
+SELECT *
+FROM offers
+WHERE restaurant_id IN (
+        SELECT restaurant_id
+        FROM restaurant
+        WHERE restaurant.chain_name = 'AriGatto')
