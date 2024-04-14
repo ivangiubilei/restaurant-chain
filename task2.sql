@@ -132,14 +132,6 @@ SELECT *
 FROM OFFERS
 WHERE RESTAURANT_ID = 1
 
--- information to be granted to the hmaitre of a restaurant
-CREATE VIEW hmaitre_information_1 AS
-SELECT *
-FROM employed
-WHERE restaurant_id = 1 AND (employee_role = 'waiter' OR employee_role = 'barman' OR employee_role = 'cleaner' OR employee_role = 'maitre')
-
-GRANT SELECT ON hmaitre_information_1 TO David_Miller;
-
 -- information to be granted on the available offers to a specific restaurant chain
 CREATE VIEW offers_arigatto AS
 SELECT *
