@@ -122,8 +122,10 @@ GRANT SELECT ON arigatto_cleaner TO cleaner_arigatto_2;
 GRANT cleaner_arigatto_2 TO Noah_Perez;
 
 ----CUSTOMER ROLE----
+--role definition
 CREATE ROLE restaurant_2_customer_id_1;
 
+--view definition
 CREATE OR REPLACE VIEW arigatto_customer_2 AS
 SELECT c.*, a.points
 FROM client c JOIN account a ON c.CLIENT_ID=a.CLIENT_ID
@@ -144,4 +146,8 @@ SELECT *
 FROM offers
 WHERE restaurant_id=2 && points < 100;
 
+--grant operations
 GRANT SELECT ON arigatto_customer_2 TO restaurant_2_customer_id_1;
+
+--grant operation to the cleaner
+GRANT restaurant_2_customer_id_1 TO Jane_Smith;
