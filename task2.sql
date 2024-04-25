@@ -87,7 +87,7 @@ SELECT address, phone_number
 FROM Restaurant
 WHERE restaurant_id = 1;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON address_restaurant_1 TO Charlotte_Davies;
+GRANT SELECT ON address_restaurant_1 TO Charlotte_Davies;
 
 -- information to be granted to a supplier of its shipment
 
