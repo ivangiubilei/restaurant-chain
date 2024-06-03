@@ -50,9 +50,9 @@ FROM ADMIN.CLIENT C JOIN ADMIN.ACCOUNT A ON C.CLIENT_ID = A.CLIENT_ID
 WHERE A.RESTAURANT_ID = 2;
 
 --grant operations
-GRANT ALL PRIVILEGES on ARIGATTO_CUSTOMERS_2 to director_arigatto_2
-GRANT ALL PRIVILEGES ON ARIGATTO_EMPLOYEE_2 to director_arigatto_2;
-GRANT ALL PRIVILEGES ON ARIGATTO_OFFERS_2 to director_arigatto_2;
+GRANT ALL PRIVILEGES ON ARIGATTO_CUSTOMERS_2 TO director_arigatto_2
+GRANT ALL PRIVILEGES ON ARIGATTO_EMPLOYEE_2 TO director_arigatto_2;
+GRANT ALL PRIVILEGES ON ARIGATTO_OFFERS_2 TO director_arigatto_2;
 
 --grant operation to the director
 GRANT Director_arigatto_2 to Olivia_Evans;
@@ -103,7 +103,7 @@ WHERE restaurant_id = 2 AND PRODUCT_TYPE='beverages';
 GRANT SELECT ON Shipments_2 TO barman_arigatto_2;
 
 --grant role to the barman
-GRANT barman_arigatto_2 to Sophia_Wilson;
+GRANT barman_arigatto_2 to Noah_Perez;
 
 ----CLEANER ROLE----
 --role definition
@@ -119,7 +119,7 @@ WHERE restaurant_id = 2;
 GRANT SELECT ON arigatto_cleaner TO cleaner_arigatto_2;
 
 --grant operation to the cleaner
-GRANT cleaner_arigatto_2 TO Noah_Perez;
+GRANT cleaner_arigatto_2 TO Daniel_Robinson;
 
 ----CUSTOMER ROLE----
 --role definition
@@ -130,6 +130,13 @@ CREATE OR REPLACE VIEW arigatto_customer_2 AS
 SELECT c.*, a.points
 FROM client c JOIN account a ON c.CLIENT_ID=a.CLIENT_ID
 WHERE a.RESTAURANT_ID=2 AND c.client_id=1;
+
+--grant operations
+GRANT SELECT ON arigatto_customer_2 TO restaurant_2_customer_id_1;
+
+--grant operation to the director
+GRANT restaurant_2_customer_id_1 TO Olivia_Evans;
+
 
 CREATE OR REPLACE VIEW arigatto_offers_gold_2 AS
 SELECT *
@@ -145,9 +152,3 @@ CREATE OR REPLACE VIEW arigatto_offers_platinum_2 AS
 SELECT *
 FROM offers
 WHERE restaurant_id=2 && points < 100;
-
---grant operations
-GRANT SELECT ON arigatto_customer_2 TO restaurant_2_customer_id_1;
-
---grant operation to the cleaner
-GRANT restaurant_2_customer_id_1 TO Jane_Smith;
