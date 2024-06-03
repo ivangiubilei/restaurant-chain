@@ -131,24 +131,36 @@ SELECT c.*, a.points
 FROM client c JOIN account a ON c.CLIENT_ID=a.CLIENT_ID
 WHERE a.RESTAURANT_ID=2 AND c.client_id=1;
 
---grant operations
-GRANT SELECT ON arigatto_customer_2 TO restaurant_2_customer_id_1;
+--view definition
 
---grant operation to the director
-GRANT restaurant_2_customer_id_1 TO Olivia_Evans;
-
+CREATE OR REPLACE VIEW arigatto_customer_2 AS
+SELECT c.*, a.points
+FROM client c JOIN account a ON c.CLIENT_ID=a.CLIENT_ID
+WHERE a.RESTAURANT_ID=2 AND c.client_id=1;
 
 CREATE OR REPLACE VIEW arigatto_offers_gold_2 AS
 SELECT *
 FROM offers
-WHERE restaurant_id=2 && points < 30;
+WHERE restaurant_id = 2 AND points < 30;
 
 CREATE OR REPLACE VIEW arigatto_offers_diamond_2 AS
 SELECT *
 FROM offers
-WHERE restaurant_id=2 && points < 70;
+WHERE restaurant_id=2 AND (points < 70);
 
 CREATE OR REPLACE VIEW arigatto_offers_platinum_2 AS
 SELECT *
 FROM offers
-WHERE restaurant_id=2 && points < 100;
+WHERE restaurant_id=2 AND (points < 100);
+
+--grant operations
+GRANT SELECT ON arigatto_customer_2 TO restaurant_2_customer_id_1;
+
+GRANT SELECT ON arigatto_offers_gold_2 TO restaurant_2_customer_id_1;
+--or
+GRANT SELECT ON arigatto_offers_diamond_2 TO restaurant_2_customer_id_1;
+--or
+GRANT SELECT ON arigatto_offers_platinum_2 TO restaurant_2_customer_id_1;
+
+--grant role to user
+GRANT restaurant_2_customer_id_1 TO account1
