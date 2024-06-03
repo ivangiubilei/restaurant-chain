@@ -38,11 +38,10 @@ CREATE VIEW employed_restaurant_1 AS
 SELECT e.*
 from EMPLOYED e
 where restaurant_id = 2;
-
-GRANT SELECT, INSERT, UPDATE, DELETE ON shipment_restaurant_1 TO Sarah_Jones; -—(director)
-GRANT SELECT, INSERT, UPDATE, DELETE ON employed_restaurant_1 TO Sarah_Jones;
+GRANT SELECT, INSERT, UPDATE, DELETE ON shipment_restaurant_1 TO Olivia_Evans; --(director)
+GRANT SELECT, INSERT, UPDATE, DELETE ON employed_restaurant_1 TO Olivia_Evans;
   
-GRANT SELECT ON shipment_restaurant_1 TO Christopher_Clark; -—(chef only the shipment view)
+GRANT SELECT ON shipment_restaurant_1 TO Christopher_Clark; --(chef only the shipment view)
 
 -- information to be granted to the director of a restaurant on the offers
 
@@ -51,7 +50,7 @@ SELECT *
 FROM OFFERS
 WHERE RESTAURANT_ID = 2;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON offers_restaurant_1 TO Sarah_Jones;
+GRANT SELECT, INSERT, UPDATE, DELETE ON offers_restaurant_1 TO Olivia_Evans;
 
 -- information to be granted to the director on the account of the first restaurant 
 
@@ -60,7 +59,7 @@ SELECT *
 FROM Account
 WHERE RESTAURANT_ID = 2;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON account_restaurant_1 TO Sarah_Jones;
+GRANT SELECT, INSERT, UPDATE, DELETE ON account_restaurant_1 TO Olivia_Evans;
 
 -- information to be granted to a maitre of the first restaurant
 
@@ -136,4 +135,3 @@ WHERE restaurant_id IN (
         WHERE restaurant.chain_name = 'AriGatto');
         
 GRANT SELECT, INSERT, UPDATE, DELETE ON offers_arigatto TO John_Smith WITH GRANT OPTION;
-
