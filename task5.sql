@@ -230,7 +230,7 @@ BEGIN
 END;
 /
 
----------------------
+----------------------
 -- Offers ID privacy--
 
 CREATE OR REPLACE FUNCTION hide_id_offers(
@@ -272,3 +272,12 @@ BEGIN
         );
 END;
 /
+
+-----------------------
+-- Grant to the users--
+grant select on offers to John_Smith;
+grant select on shipment to John_Smith;
+grant select on employed to John_Smith;
+grant select on offers to Olivia_Evans;
+grant select on shipment to Olivia_Evans;
+grant select on employed to Olivia_Evans;
