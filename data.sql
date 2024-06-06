@@ -67,7 +67,7 @@ INSERT INTO Client (client_id, name, surname, email, birthday, password)
 VALUES (9, 'Jane', 'Smith', 'jane.smith@email.com', TO_DATE('1985-07-14', 'YYYY-MM-DD'), 'Secret_password11');
 
 INSERT INTO Client (client_id, name, surname, email, birthday, password)
-VALUES (10, 'Alice', 'Rossi', 'alice.johnson@email.com', TO_DATE('2002-12-25', 'YYYY-MM-DD'), 'Secret_password11');
+VALUES (10, 'Alice', 'Rossi', 'alice.rossi@email.com', TO_DATE('2002-12-25', 'YYYY-MM-DD'), 'Secret_password11');
 
 INSERT INTO Client (client_id, name, surname, email, birthday, password)
 VALUES (11, 'Michael', 'Johnson', 'michael.johnson@email.com', TO_DATE('1989-07-15', 'YYYY-MM-DD'), 'Secret_password11');
@@ -79,10 +79,10 @@ INSERT INTO Client (client_id, name, surname, email, birthday, password)
 VALUES (13, 'Emma', 'Martinez', 'emma.martinez@email.com', TO_DATE('1993-10-12', 'YYYY-MM-DD'), 'Secret_password11');
 
 INSERT INTO Client (client_id, name, surname, email, birthday, password)
-VALUES (14, 'Olivia', 'Esposito', 'olivia.smith@email.com', TO_DATE('1986-02-28', 'YYYY-MM-DD'), 'Secret_password11');
+VALUES (14, 'Olivia', 'Esposito', 'olivia.esposito@email.com', TO_DATE('1986-02-28', 'YYYY-MM-DD'), 'Secret_password11');
 
 INSERT INTO Client (client_id, name, surname, email, birthday, password)
-VALUES (15, 'Daniele', 'Verdi', 'daniel.taylor@email.com', TO_DATE('1990-09-15', 'YYYY-MM-DD'), 'Secret_password11');
+VALUES (15, 'Daniele', 'Verdi', 'daniele.verdi@email.com', TO_DATE('1990-09-15', 'YYYY-MM-DD'), 'Secret_password11');
 
 -- Suppliers
 INSERT INTO Supplier (supplier_id, supply_type, company, name, surname, email)
