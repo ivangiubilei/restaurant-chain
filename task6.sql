@@ -63,3 +63,27 @@ long_name => 'ItaloBros',
 comp_num         =>  3000);
 END;
 
+-- create groups
+BEGIN
+SA_COMPONENTS.CREATE_GROUP (
+policy_name => 'Proj_OLS_POL',
+ short_name => 'ad',
+ long_name => 'Administration',
+group_num         =>  5000);
+END;
+
+BEGIN
+SA_COMPONENTS.CREATE_GROUP (
+policy_name => 'Proj_OLS_POL',
+short_name => 'kt',
+long_name => 'Kitchen',
+group_num         =>  3000);
+END;
+
+BEGIN
+SA_COMPONENTS.CREATE_GROUP (
+policy_name => 'Proj_OLS_POL',
+short_name => 'rr',
+long_name => 'restaurant_room',
+group_num         =>  1000);
+END;
