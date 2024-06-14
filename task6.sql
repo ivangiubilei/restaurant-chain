@@ -11,6 +11,7 @@ select * from ALL_SA_POLICIES;
 EXEC SA_SYSDBA.ENABLE_POLICY ('Proj_OLS_POL');
 
 -- granted DBA role to admin from dashboard
+-- create levels
 
 BEGIN
 SA_COMPONENTS.CREATE_LEVEL (
@@ -36,5 +37,29 @@ short_name => 'U',
 long_name => 'UNRESTRICTED');
 END;
 
-select * from dual;
+-- create compartments
+
+BEGIN
+SA_COMPONENTS.CREATE_COMPARTMENT (
+policy_name => 'Proj_OLS_POL',
+ short_name => 'PL',
+ long_name => 'Planeinos_Goodos',
+comp_num         =>  1000);
+END;
+
+BEGIN
+SA_COMPONENTS.CREATE_COMPARTMENT (
+policy_name => 'Proj_OLS_POL',
+short_name => 'AG',
+long_name => 'AriGatto',
+comp_num         =>  2000);
+END;
+
+BEGIN
+SA_COMPONENTS.CREATE_COMPARTMENT (
+policy_name => 'Proj_OLS_POL',
+short_name => 'IT',
+long_name => 'ItaloBros',
+comp_num         =>  3000);
+END;
 
