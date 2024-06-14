@@ -50,41 +50,43 @@ EXCEPTION
 END;
 
 ---------------------
--- Employee privacy--
+-- Employed counts--
 
-CREATE OR REPLACE FUNCTION employee_privacy(
+CREATE OR REPLACE FUNCTION count_employed(
     schema_var VARCHAR2,
     table_var VARCHAR2)
     RETURN VARCHAR2
     IS
     return_val VARCHAR2(400);
     employee_role EMPLOYED.employee_role% TYPE;
-    restaurant_id   EMPLOYED.restaurant_id% TYPE;
+    chain_name EMPLOYED.CHAIN_NAME%TYPE;
+    restaurant_id EMPLOYED.restaurant_id% TYPE;
 BEGIN
     employee_role := SYS_CONTEXT('emp_ctx', 'emp_role');
+    chain_name := SYS_CONTEXT('emp_ctx', 'chain_name');
+    restaurant_id := SYS_CONTEXT('emp_ctx', 'restaurant_id');
     IF employee_role = 'CEO' THEN
-        return_val := '1=1';
-    ELSE
-        restaurant_id := SYS_CONTEXT('emp_ctx', 'restaurant_id');
-        return_val := 'active=1 AND restaurant_id=' || restaurant_id;
+        return_val := 'chain_name = ''' || chain_name || '''';
+    ELSE 
+        IF employee_role = 'director' THEN
+            return_val := 'restaurant_id = ' || restaurant_id;
+        ELSE
+            return_val := '0=1';
+        END IF;
     END IF;
     RETURN return_val;
-END employee_privacy;
-/
-
-
+END count_employed;
 
 BEGIN
     SYS.DBMS_RLS.ADD_POLICY
         (
             OBJECT_SCHEMA => 'ADMIN',
-            OBJECT_NAME => 'EMPLOYEE',
-            POLICY_NAME => 'VPD_employee_privacy',
+            OBJECT_NAME => 'employed_number',
+            POLICY_NAME => 'count_employed',
             FUNCTION_SCHEMA => 'ADMIN',
-            POLICY_FUNCTION => 'employee_privacy'
+            POLICY_FUNCTION => 'count_employed'
         );
 END;
-/
 
 ------------------------
 -- Hide Employement ID--
@@ -96,18 +98,18 @@ CREATE OR REPLACE FUNCTION hide_id_employement(
     IS
     return_val VARCHAR2(400);
     employee_role EMPLOYED.employee_role% TYPE;
-    restaurant_id   EMPLOYED.restaurant_id% TYPE;
-
+    chain_name EMPLOYED.CHAIN_NAME%TYPE;
 BEGIN
     employee_role := SYS_CONTEXT('emp_ctx', 'emp_role');
+    chain_name := SYS_CONTEXT('emp_ctx', 'chain_name');
     IF employee_role = 'CEO' THEN
-        return_val := '1=1';
+        return_val := 'chain_name = ''' || chain_name || '''';
     ELSE
         return_val := 'employement_id = NULL';
     END IF;
     RETURN return_val;
 END hide_id_employement;
-/
+
 
 BEGIN
     SYS.DBMS_RLS.ADD_POLICY
