@@ -50,6 +50,49 @@ EXCEPTION
 END;
 
 ---------------------
+-- offers by employees --
+
+SELECT offers."OFFERS_ID",offers."RESTAURANT_ID",offers."STARTING_DATE",offers."POINTS",offers."DESCRIPTION",offers."ENDING_DATE", RESTAURANT.CHAIN_NAME 
+    FROM OFFERS JOIN RESTAURANT ON OFFERS.RESTAURANT_ID = RESTAURANT.RESTAURANT_ID
+
+create or replace FUNCTION ADMIN.view_offers_function_employee(
+    schema_var VARCHAR2,
+    table_var VARCHAR2)
+    RETURN VARCHAR2
+    IS
+    return_val VARCHAR2(400);
+    employee_role EMPLOYED.employee_role% TYPE;
+    chain_name EMPLOYED.CHAIN_NAME%TYPE;
+    restaurant_id EMPLOYED.restaurant_id% TYPE;
+BEGIN
+    employee_role := SYS_CONTEXT('emp_ctx', 'emp_role');
+    chain_name := SYS_CONTEXT('emp_ctx', 'chain_name');
+    restaurant_id := SYS_CONTEXT('emp_ctx', 'restaurant_id');
+    IF employee_role = 'CEO' THEN
+        return_val := 'chain_name = ''' || chain_name || '''';
+    ELSE 
+        IF employee_role = 'director' THEN
+            return_val := 'restaurant_id = ' || restaurant_id;
+        ELSE
+            return_val := '0=1';
+        END IF;
+    END IF;
+    RETURN return_val;
+END view_offers_function_employee;
+
+BEGIN
+    SYS.DBMS_RLS.ADD_POLICY
+        (
+            OBJECT_SCHEMA => 'ADMIN',
+            OBJECT_NAME => 'OFFERS_AGGREGATED',
+            POLICY_NAME => 'VIEW_OFFERS_EMPLOYEES',
+            FUNCTION_SCHEMA => 'ADMIN',
+            POLICY_FUNCTION => 'view_offers_function_employee'
+        );
+END;
+
+
+---------------------
 -- Employed counts--
 
 CREATE OR REPLACE FUNCTION count_employed(
@@ -124,41 +167,6 @@ BEGIN
         );
 END;
 
---------------
--- Shipment --
-
-CREATE OR REPLACE FUNCTION shipment_privacy(
-    schema_var VARCHAR2,
-    table_var VARCHAR2)
-    RETURN VARCHAR2
-    IS
-    return_val VARCHAR2(400);
-    employee_role EMPLOYED.employee_role% TYPE;
-    restaurant_id   EMPLOYED.restaurant_id% TYPE;
-BEGIN
-    employee_role := SYS_CONTEXT('emp_ctx', 'emp_role');
-    IF employee_role = 'CEO' THEN
-        return_val := '1=1';
-    ELSE
-        restaurant_id := SYS_CONTEXT('shipment_ctx', 'restaurant_id');
-        return_val := 'active=1 AND restaurant_id =' || restaurant_id;
-    END IF;
-    RETURN return_val;
-END shipment_privacy;
-/
-
-BEGIN
-    SYS.DBMS_RLS.ADD_POLICY
-        (
-            OBJECT_SCHEMA => 'ADMIN',
-            OBJECT_NAME => 'SHIPMENT',
-            POLICY_NAME => 'VPD_shipment_privacy',
-            FUNCTION_SCHEMA => 'ADMIN',
-            POLICY_FUNCTION => 'shipment_privacy'
-        );
-END;
-/
-
 ------------------------
 -- Supplier ID privacy--
 
@@ -198,88 +206,77 @@ END;
 /
 
 ---------------------
--- Offers privacy----
+-- Points privacy----
 
-CREATE OR REPLACE FUNCTION offers_privacy(
+CREATE CONTEXT point_ctx USING set_point_ctx_pkg;
+SELECT * FROM sys.dba_context;
+
+CREATE OR REPLACE EDITIONABLE PACKAGE "ADMIN"."SET_POINT_CTX_PKG" IS
+PROCEDURE set_point;
+END;
+
+
+CREATE OR REPLACE EDITIONABLE PACKAGE BODY "ADMIN"."SET_POINT_CTX_PKG" IS
+PROCEDURE set_point
+IS 
+username varchar2(200);
+id_client CLIENT.Client_id% TYPE;
+BEGIN
+    username:= SYS_CONTEXT('USERENV', 'SESSION_USER');
+    SELECT c.CLIENT_ID INTO id_client
+    FROM ADMIN.CLIENT c
+    WHERE REPLACE(UPPER(SUBSTR(c.email, 1, INSTR(c.email, '@')-1)),'.','_') = username;
+    
+    DBMS_SESSION.SET_CONTEXT('point_ctx', 'id_client', id_client); 
+
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN NULL;  
+END;
+END;
+
+CREATE OR REPLACE TRIGGER set_points_ctx_trig
+    AFTER LOGON
+    ON DATABASE
+BEGIN
+    set_point_ctx_pkg.set_point;
+EXCEPTION
+    WHEN OTHERS THEN dbms_output.put_line('EXCEPTION_OTHERS');
+END;
+
+
+CREATE OR REPLACE FUNCTION select_account_function(
     schema_var VARCHAR2,
     table_var VARCHAR2)
     RETURN VARCHAR2
     IS
     return_val VARCHAR2(400);
-    employee_role EMPLOYED.employee_role% TYPE;
-    restaurant_id   EMPLOYED.restaurant_id% TYPE;
+    id_client CLIENT.CLIENT_ID%TYPE;
 BEGIN
-    employee_role := SYS_CONTEXT('emp_ctx', 'emp_role');
-    IF employee_role = 'CEO' THEN
-        return_val := '1=1';
-    ELSE
-        restaurant_id := SYS_CONTEXT('emp_ctx', 'restaurant_id');
-        return_val := 'active=1 AND restaurant_id=' || restaurant_id;
-    END IF;
-    RETURN return_val;
-END offers_privacy;
-/
+    id_client := SYS_CONTEXT('point_ctx', 'id_client');
+    RETURN 'client_id = ' || id_client;
+END select_account_function;
+
 
 BEGIN
     SYS.DBMS_RLS.ADD_POLICY
         (
             OBJECT_SCHEMA => 'ADMIN',
-            OBJECT_NAME => 'OFFERS',
-            POLICY_NAME => 'VPD_offers_privacy',
+            OBJECT_NAME => 'ACCOUNT',
+            POLICY_NAME => 'select_account_policy',
             FUNCTION_SCHEMA => 'ADMIN',
-            POLICY_FUNCTION => 'offers_privacy'
+            POLICY_FUNCTION => 'select_account_function'
         );
 END;
-/
 
-----------------------
--- Offers ID privacy--
-
-CREATE OR REPLACE FUNCTION hide_id_offers(
-    schema_var VARCHAR2,
-    table_var VARCHAR2)
-    RETURN VARCHAR2
-    IS
-    return_val VARCHAR2(400);
-    employee_role EMPLOYED.employee_role% TYPE;
-    restaurant_id   EMPLOYED.restaurant_id% TYPE;
-
-BEGIN
-    employee_role := SYS_CONTEXT('emp_ctx', 'emp_role');
-    IF employee_role = 'CEO' THEN
-        return_val := '1=1';
-    ELSE
-        IF
-            employee_role = 'Director' THEN
-            restaurant_id := SYS_CONTEXT('emp_ctx', 'restaurant_id');
-            return_val := 'offers_id = NULL and restaurant_id=' || restaurant_id;
-        ELSE
-            return_val := '0=1';
-        END IF;
-    END IF;
-    RETURN return_val;
-END hide_id_offers;
-/
-
-BEGIN
-    SYS.DBMS_RLS.ADD_POLICY
-        (
-            OBJECT_SCHEMA => 'ADMIN',
-            OBJECT_NAME => 'OFFERS',
-            POLICY_NAME => 'VPD_hide_offers_id',
-            FUNCTION_SCHEMA => 'ADMIN',
-            POLICY_FUNCTION => 'hide_id_offers',
-            SEC_RELEVANT_COLS => 'offers_id',
-            SEC_RELEVANT_COLS_OPT => dbms_rls.ALL_ROWS
-        );
-END;
-/
 
 -----------------------
 -- Grant to the users--
-grant select on offers to John_Smith;
+grant select on account to alice_rossi;
+grant select on shipment_aggregated to John_Smith;
 grant select on shipment to John_Smith;
+grant select on employed_number to John_Smith;
 grant select on employed to John_Smith;
-grant select on offers to Olivia_Evans;
+grant select on shipment_aggregated to Olivia_Evans;
 grant select on shipment to Olivia_Evans;
+grant select on employed_number to Olivia_Evans;
 grant select on employed to Olivia_Evans;
