@@ -134,6 +134,41 @@ BEGIN
   data_label      => TRUE);
 END;
 
+-- user labels
+-- ceo
+--- AUTHORIZING LEVELS
+BEGIN
+SA_USER_ADMIN.SET_LEVELS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'John_Smith', --CEO
+max_level => 'HS',
+min_level => 'S',
+def_level => 'HS',
+row_level => 'HS');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_LEVELS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Olivia_Evans', --Director
+max_level => 'S',
+min_level => 'U',
+def_level => 'S',
+row_level => 'S');
+END;
+
+
+--- AUTHORIZING COMPARTMENTS
+BEGIN
+SA_USER_ADMIN.SET_COMPARTMENTS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'john_Smith',
+read_comps => 'AG',
+write_comps => 'AG',
+def_comps => 'AG',
+row_comps => 'AG');
+END;
+
 select dump(CHAR_TO_LABEL('Employee_OLS_POL','U::rr')) from dual;
 
 alter table supplier add LABEL_COL number(4);
