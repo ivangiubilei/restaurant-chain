@@ -98,24 +98,7 @@ write_groups => 'kt,rr', -- Grants write access only to 'KT' and 'RR' but not 'A
 def_groups => 'kt,rr',
 row_groups => 'kt,rr');
 END;
-/
 
-
---- SET USERS LABELS
-BEGIN
-SA_USER_ADMIN.SET_USER_LABELS (
-policy_name => 'Emp_OLS_POL',
-user_name => 'John_Smith',
-max_read_label => 'HS:AR: Ad, kt, rr');
-
-SA_USER_ADMIN.SET_USER_LABELS (
-policy_name => 'HR_OLS_POL',
-user_name => 'Olivia_Evans',
-max_read_label => 'S:AG:Ad, kt, rr');
-
-SA_USER_ADMIN.SET_USER_LABELS (
-policy_name => 'HR_OLS_POL',
-user_name => 'lleagull',
-max_read_label => 'HS:LEG:');
-END;
-/
+--- To verify the setup (policies and authorization)
+SELECT * FROM ALL_SA_USER_LABELS WHERE USER_NAME = 'John_Smith';
+SELECT * FROM ALL_SA_USER_LABELS WHERE USER_NAME = 'Olivia_Evans';
