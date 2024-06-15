@@ -1,1 +1,115 @@
 --- notes for OLS
+
+--- CREATE THE DATA LABEL GROUPS
+BEGIN
+SA_COMPONENTS.CREATE_GROUP (
+policy_name => 'Emp_OLS_POL',
+short_name => 'ad',
+long_name => 'Administration',
+group_num => 5000);
+
+SA_COMPONENTS.CREATE_GROUP (
+policy_name => 'Emp_OLS_POL',
+group_num => 3000,
+short_name => 'kt',
+long_name => 'Kitchen',
+parent_name => 'ad');
+
+SA_COMPONENTS.CREATE_GROUP (
+policy_name => 'Emp_OLS_POL',
+group_num => 1000,
+short_name => 'rr',
+long_name => 'restaurant_room',
+parent_name => 'ad');
+END;
+/
+
+--- ASSOCIATING THE POLICY COMPONENTS
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL (
+policy_name => 'Emp_OLS_POL',
+label_tag => 1100,
+label_value => 'HS:PL:AD,KT,RR', -- HIGHLY_SENSITIVE level for the PL compartment
+data_label => TRUE);
+
+SA_LABEL_ADMIN.CREATE_LABEL (
+policy_name => 'Emp_OLS_POL',
+label_tag => 2100,
+label_value => 'HS:AG:AD,KT,RR', -- HIGHLY_SENSITIVE level for the AG compartment,HIGHLY_SENSITIVE:ARIGATTO:AD, KT, RR -- CEO
+data_label => TRUE);
+
+SA_LABEL_ADMIN.CREATE_LABEL (
+policy_name => 'Emp_OLS_POL',
+label_tag => 3100,
+label_value => 'S:AG:'AD,KT,RR, --SENSITIVE level for the AG compartment,SENSITIVE:ARIGATTO:AD,KT,RR -- DIRECTOR
+data_label => TRUE);
+END;
+/
+
+--- AUTHORIZING A LEVEL
+BEGIN
+SA_USER_ADMIN.SET_LEVELS (
+policy_name => 'Emp_OLS_POL',
+user_name => 'John_Smith', --CEO
+max_level => 'HS',
+min_level => 'U',
+def_level => 'HS',
+row_level => 'HS');
+END;
+/
+
+SA_USER_ADMIN.SET_LEVELS (
+policy_name => 'Emp_OLS_POL',
+user_name => 'Olivia_Evans', --Director
+max_level => 'S',
+min_level => 'U',
+def_level => 'S',
+row_level => 'S');
+END;
+/
+
+--- AUTHORIZING A COMPARTMENT
+BEGIN
+SA_USER_ADMIN.SET_COMPARTMENTS (
+policy_name => 'Emp_OLS_POL',
+user_name => 'john_Smith',
+read_comps => 'AG',
+write_comps => 'AG',
+def_comps => 'AG',
+row_comps => 'AG');
+END;
+/
+
+--- AUTHORIZING A GROUP
+BEGIN
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Emp_OLS_POL',
+user_name => 'John_Smith', -- check all privileges for the CEO
+read_groups => 'ad');
+
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Emp_OLS_POL',
+user_name => 'Olivia_Evans', -- read-only for the administration
+read_groups => 'ad');
+END;
+/
+
+
+--- SET USERS LABELS
+BEGIN
+SA_USER_ADMIN.SET_USER_LABELS (
+policy_name => 'Emp_OLS_POL',
+user_name => 'John_Smith',
+max_read_label => 'HS:AR: Ad, kt, rr');
+
+SA_USER_ADMIN.SET_USER_LABELS (
+policy_name => 'HR_OLS_POL',
+user_name => 'Olivia_Evans',
+max_read_label => 'S:AG:Ad, kt, rr');
+
+SA_USER_ADMIN.SET_USER_LABELS (
+policy_name => 'HR_OLS_POL',
+user_name => 'lleagull',
+max_read_label => 'HS:LEG:');
+END;
+/
