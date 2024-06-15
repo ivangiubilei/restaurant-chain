@@ -85,7 +85,10 @@ BEGIN
 SA_USER_ADMIN.SET_GROUPS (
 policy_name => 'Emp_OLS_POL',
 user_name => 'John_Smith', -- check all privileges for the CEO
-read_groups => 'ad');
+read_groups => 'AD',
+write_groups => 'AD',
+def_groups => 'AD',
+row_groups => 'AD');
 
 SA_USER_ADMIN.SET_GROUPS (
 policy_name => 'Emp_OLS_POL',
