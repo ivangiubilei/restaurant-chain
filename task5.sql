@@ -272,11 +272,11 @@ END;
 -----------------------
 -- Grant to the users--
 grant select on account to alice_rossi;
-grant select on shipment_aggregated to John_Smith;
+grant select on offers_aggregated to John_Smith;
 grant select on shipment to John_Smith;
 grant select on employed_number to John_Smith;
 grant select on employed to John_Smith;
-grant select on shipment_aggregated to Olivia_Evans;
+grant select on offers_aggregated to Olivia_Evans;
 grant select on shipment to Olivia_Evans;
 grant select on employed_number to Olivia_Evans;
 grant select on employed to Olivia_Evans;
