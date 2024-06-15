@@ -102,3 +102,20 @@ END;
 --- To verify the setup (policies and authorization)
 SELECT * FROM ALL_SA_USER_LABELS WHERE USER_NAME = 'John_Smith';
 SELECT * FROM ALL_SA_USER_LABELS WHERE USER_NAME = 'Olivia_Evans';
+
+
+--- GRANTING PRIVILAGES TO USER
+BEGIN
+SA_USER_ADMIN.SET_USER_PRIVS(
+policy_name => 'Emp_OLS_POL',
+user_name => 'John_Smith',
+privileges => 'FULL');
+END;
+/
+BEGIN
+SA_USER_ADMIN.SET_USER_PRIVS (
+policy_name => 'Emp_OLS_POL',
+user_name => 'Olivia_Evans',
+privileges => 'READ, WRITEDOWN');
+END;
+/
