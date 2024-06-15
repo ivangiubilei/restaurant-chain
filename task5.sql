@@ -52,6 +52,10 @@ END;
 ---------------------
 -- offers by employees --
 
+CREATEB VIEW OFFERS_AGGREGATED as
+SELECT offers."OFFERS_ID", offers."RESTAURANT_ID", offers."STARTING_DATE", offers."POINTS", offers."DESCRIPTION", offers."ENDING_DATE", RESTAURANT.CHAIN_NAME 
+FROM OFFERS JOIN RESTAURANT ON OFFERS.RESTAURANT_ID = RESTAURANT.RESTAURANT_ID
+
 SELECT offers."OFFERS_ID",offers."RESTAURANT_ID",offers."STARTING_DATE",offers."POINTS",offers."DESCRIPTION",offers."ENDING_DATE", RESTAURANT.CHAIN_NAME 
     FROM OFFERS JOIN RESTAURANT ON OFFERS.RESTAURANT_ID = RESTAURANT.RESTAURANT_ID
 
@@ -94,6 +98,12 @@ END;
 
 ---------------------
 -- Employed counts--
+
+create view EMPLOYED_NUMBER as
+select count(employee_id) as employed_number, chain_name, restaurant_id 
+from employed 
+where TO_DATE<=all(select current_date from dual) 
+group by chain_name, restaurant_id
 
 CREATE OR REPLACE FUNCTION count_employed(
     schema_var VARCHAR2,
