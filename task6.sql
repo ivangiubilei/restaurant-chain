@@ -110,6 +110,30 @@ label_value     => 'U::rr',
 data_label      => TRUE);
 END;
 
+BEGIN
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'Employee_OLS_POL',
+  label_tag       => '1620',
+  label_value     => 'S:IT:ad',
+  data_label      => TRUE);
+END;
+
+BEGIN
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'Employee_OLS_POL',
+  label_tag       => '1720',
+  label_value     => 'S:AG:ad',
+  data_label      => TRUE);
+END;
+
+BEGIN
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'Employee_OLS_POL',
+  label_tag       => '1820',
+  label_value     => 'S:PL:ad',
+  data_label      => TRUE);
+END;
+
 select dump(CHAR_TO_LABEL('Employee_OLS_POL','U::rr')) from dual;
 
 alter table supplier add LABEL_COL number(4);
@@ -117,3 +141,9 @@ alter table supplier add LABEL_COL number(4);
 update supplier set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U::ad') where SUPPLY_TYPE = 'Cleaning Supplies';
 update supplier set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U::kt') where SUPPLY_TYPE in ('Produce', 'Meat', 'Seafood', 'Dairy');
 update supplier set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U::rr') where SUPPLY_TYPE in ('Wine', 'Beverages', 'Bakery', 'Coffee');
+
+alter table employed add LABEL_COL number(4);
+
+update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:AG:ad') where CHAIN_NAME = 'AriGatto';
+update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:PL:ad') where CHAIN_NAME = 'Planeinos Goodos';
+update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:IT:ad') where CHAIN_NAME = 'Italobros';
