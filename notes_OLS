@@ -85,15 +85,18 @@ BEGIN
 SA_USER_ADMIN.SET_GROUPS (
 policy_name => 'Emp_OLS_POL',
 user_name => 'John_Smith', -- check all privileges for the CEO
-read_groups => 'AD',
+read_groups => 'AD', -- Grants read access to 'AD' and all its child groups
 write_groups => 'AD',
 def_groups => 'AD',
 row_groups => 'AD');
 
 SA_USER_ADMIN.SET_GROUPS (
 policy_name => 'Emp_OLS_POL',
-user_name => 'Olivia_Evans', -- read-only for the administration
-read_groups => 'ad');
+user_name => 'Olivia_Evans', -- Director with specific access
+read_groups => 'AD',
+write_groups => 'kt,rr', -- Grants write access only to 'KT' and 'RR' but not 'AD'
+def_groups => 'kt,rr',
+row_groups => 'kt,rr');
 END;
 /
 
