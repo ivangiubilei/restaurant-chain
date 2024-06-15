@@ -85,3 +85,29 @@ short_name => 'rr',
 long_name => 'restaurant_room',
 group_num         =>  1000);
 END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1310',
+label_value     => 'U::kt',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1410',
+label_value     => 'U::ad',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1510',
+label_value     => 'U::',
+data_label      => TRUE);
+END;
+
+
