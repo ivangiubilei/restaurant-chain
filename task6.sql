@@ -36,6 +36,27 @@ short_name => 'U',
 long_name => 'UNRESTRICTED');
 END;
 
+--- AUTHORIZING GROUPS
+BEGIN
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'john_Smith',
+read_groups => 'ad',
+write_groups => 'ad',
+def_groups => 'ad',
+row_groups => 'ad');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Olivia_Evans',
+read_groups => 'ad',
+write_groups => 'ad',
+def_groups => 'ad',
+row_groups => 'ad');
+END;
+
 -- create compartments
 
 BEGIN
@@ -207,6 +228,25 @@ def_level => 'S',
 row_level => 'S');
 END;
 
+BEGIN
+SA_USER_ADMIN.SET_LEVELS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Christopher_Clark', --Chef
+max_level => 'S',
+min_level => 'U',
+def_level => 'S',
+row_level => 'S');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_LEVELS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Ethan_Harris', --waiter
+max_level => 'U',
+min_level => 'U',
+def_level => 'U',
+row_level => 'U');
+END;
 
 --- AUTHORIZING COMPARTMENTS
 BEGIN
@@ -217,6 +257,78 @@ read_comps => 'AG',
 write_comps => 'AG',
 def_comps => 'AG',
 row_comps => 'AG');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_COMPARTMENTS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Olivia_Evans',
+read_comps => 'AG',
+write_comps => 'AG',
+def_comps => 'AG',
+row_comps => 'AG');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_COMPARTMENTS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Christopher_Clark',
+read_comps => 'AG',
+write_comps => 'AG',
+def_comps => 'AG',
+row_comps => 'AG');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_COMPARTMENTS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Ethan_Harris',
+read_comps => 'AG',
+write_comps => 'AG',
+def_comps => 'AG',
+row_comps => 'AG');
+END;
+
+--- AUTHORIZING GROUPS
+BEGIN
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'john_Smith',
+read_groups => 'ad',
+write_groups => 'ad',
+def_groups => 'ad',
+row_groups => 'ad');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Olivia_Evans',
+read_groups => 'ad',
+write_groups => 'ad',
+def_groups => 'ad',
+row_groups => 'ad');
+END;
+
+BEGIN
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Christopher_Clark',
+read_groups => 'kt',
+write_groups => 'kt',
+def_groups => 'kt',
+row_groups => 'kt');
+END;
+
+
+BEGIN
+SA_USER_ADMIN.SET_GROUPS (
+policy_name => 'Employee_OLS_POL',
+user_name => 'Ethan_Harris',
+read_groups => 'rr',
+write_groups => 'rr',
+def_groups => 'rr',
+row_groups => 'rr');
 END;
 
 -- Policy 1 - EMPLOYED
