@@ -1,3 +1,4 @@
+-- create ols environment
 BEGIN
 SA_SYSDBA.CREATE_POLICY
 (
@@ -40,8 +41,8 @@ END;
 BEGIN
 SA_COMPONENTS.CREATE_COMPARTMENT (
 policy_name => 'Employee_OLS_POL',
- short_name => 'PL',
- long_name => 'Planeinos_Goodos',
+short_name => 'PL',
+long_name => 'Planeinos_Goodos',
 comp_num         =>  1000);
 END;
 
@@ -65,8 +66,8 @@ END;
 BEGIN
 SA_COMPONENTS.CREATE_GROUP (
 policy_name => 'Employee_OLS_POL',
- short_name => 'ad',
- long_name => 'Administration',
+short_name => 'ad',
+long_name => 'Administration',
 group_num         =>  5000);
 END;
 
@@ -86,6 +87,7 @@ long_name => 'restaurant_room',
 group_num         =>  1000);
 END;
 
+-- create labels
 BEGIN
 SA_LABEL_ADMIN.CREATE_LABEL  (
 policy_name     => 'Employee_OLS_POL',
@@ -111,27 +113,75 @@ data_label      => TRUE);
 END;
 
 BEGIN
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'Employee_OLS_POL',
-  label_tag       => '1620',
-  label_value     => 'S:IT:ad',
-  data_label      => TRUE);
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1620',
+label_value     => 'S:IT:ad',
+data_label      => TRUE);
 END;
 
 BEGIN
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'Employee_OLS_POL',
-  label_tag       => '1720',
-  label_value     => 'S:AG:ad',
-  data_label      => TRUE);
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1720',
+label_value     => 'S:AG:ad',
+data_label      => TRUE);
 END;
 
 BEGIN
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'Employee_OLS_POL',
-  label_tag       => '1820',
-  label_value     => 'S:PL:ad',
-  data_label      => TRUE);
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1820',
+label_value     => 'S:PL:ad',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1630',
+label_value     => 'U:IT:ad',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1730',
+label_value     => 'U:AG:ad',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1830',
+label_value     => 'U:PL:ad',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1640',
+label_value     => 'HS:IT:ad',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1740',
+label_value     => 'HS:AG:ad',
+data_label      => TRUE);
+END;
+
+BEGIN
+SA_LABEL_ADMIN.CREATE_LABEL  (
+policy_name     => 'Employee_OLS_POL',
+label_tag       => '1840',
+label_value     => 'HS:PL:ad',
+data_label      => TRUE);
 END;
 
 -- user labels
@@ -169,7 +219,21 @@ def_comps => 'AG',
 row_comps => 'AG');
 END;
 
-select dump(CHAR_TO_LABEL('Employee_OLS_POL','U::rr')) from dual;
+-- Policy 1 - EMPLOYED
+alter table employed add LABEL_COL number(4);
+
+update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:AG:ad') where CHAIN_NAME = 'AriGatto';
+update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:PL:ad') where CHAIN_NAME = 'Planeinos Goodos';
+update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:IT:ad') where CHAIN_NAME = 'Italobros';
+
+BEGIN SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+policy_name => 'Employee_OLS_POL',
+schema_name => 'ADMIN',
+table_name => 'EMPLOYED');
+END;
+
+
+-- Policy 2 - SUPPLIER
 
 alter table supplier add LABEL_COL number(4);
 
@@ -177,8 +241,107 @@ update supplier set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U::ad') where 
 update supplier set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U::kt') where SUPPLY_TYPE in ('Produce', 'Meat', 'Seafood', 'Dairy');
 update supplier set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U::rr') where SUPPLY_TYPE in ('Wine', 'Beverages', 'Bakery', 'Coffee');
 
-alter table employed add LABEL_COL number(4);
+BEGIN SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+policy_name => 'Employee_OLS_POL',
+schema_name => 'ADMIN',
+table_name => 'SUPPLIER');
+END;
 
-update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:AG:ad') where CHAIN_NAME = 'AriGatto';
-update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:PL:ad') where CHAIN_NAME = 'Planeinos Goodos';
-update employed set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:IT:ad') where CHAIN_NAME = 'Italobros';
+
+-- policy 3 - OFFERS
+
+alter table offers add LABEL_COL number(4);
+
+update offers set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U:AG:ad') where  RESTAURANT_ID in (select RESTAURANT_ID from RESTAURANT where chain_name = 'AriGatto');
+update offers set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U:PL:ad') where  RESTAURANT_ID in (select RESTAURANT_ID from RESTAURANT where chain_name = 'Planeinos Goodos');
+update offers set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','U:IT:ad') where  RESTAURANT_ID in (select RESTAURANT_ID from RESTAURANT where chain_name = 'Italobros');
+
+BEGIN SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+policy_name => 'Employee_OLS_POL',
+schema_name => 'ADMIN',
+table_name => 'OFFERS');
+END;
+
+
+-- policy 4 - ACCOUNT
+
+alter table account add LABEL_COL number(4);
+
+update account set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','HS:AG:ad') where  RESTAURANT_ID in (select RESTAURANT_ID from RESTAURANT where chain_name = 'AriGatto');
+update account set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','HS:PL:ad') where  RESTAURANT_ID in (select RESTAURANT_ID from RESTAURANT where chain_name = 'Planeinos Goodos');
+update account set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','HS:IT:ad') where  RESTAURANT_ID in (select RESTAURANT_ID from RESTAURANT where chain_name = 'Italobros');
+
+BEGIN SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+policy_name => 'Employee_OLS_POL',
+schema_name => 'ADMIN',
+table_name => 'ACCOUNT');
+END;
+
+
+-- Policy 5 - SHIPMENT
+
+alter table shipment add LABEL_COL number(4);
+
+update shipment set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:AG:kt') where 
+RESTAURANT_ID in (select RESTAURANT_ID 
+from RESTAURANT 
+where chain_name = 'AriGatto') and 
+SUPPLIER_ID in (select shipment.SUPPLIER_ID 
+from SUPPLIER where SUPPLY_TYPE in ('Produce', 'Meat', 'Seafood', 'Dairy'));
+
+update shipment set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:PL:kt') where 
+RESTAURANT_ID in (select RESTAURANT_ID 
+from RESTAURANT 
+where chain_name = 'Planeinos Goodos')and 
+SUPPLIER_ID in (select shipment.SUPPLIER_ID 
+from SUPPLIER where SUPPLY_TYPE in ('Produce', 'Meat', 'Seafood', 'Dairy'));
+
+update shipment set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:IT:kt') where 
+RESTAURANT_ID in (select RESTAURANT_ID 
+from RESTAURANT 
+where chain_name = 'Italobros')and 
+SUPPLIER_ID in (select shipment.SUPPLIER_ID 
+from SUPPLIER where SUPPLY_TYPE in ('Produce', 'Meat', 'Seafood', 'Dairy'));
+
+update shipment set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:AG:rr') where 
+RESTAURANT_ID in (select RESTAURANT_ID 
+from RESTAURANT 
+where chain_name = 'AriGatto')and 
+SUPPLIER_ID in (select shipment.SUPPLIER_ID 
+from SUPPLIER where SUPPLY_TYPE in ('Wine', 'Beverages', 'Bakery', 'Coffee'));
+
+update shipment set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:PL:rr') where 
+RESTAURANT_ID in (select RESTAURANT_ID 
+from RESTAURANT 
+where chain_name = 'Planeinos Goodos')and 
+SUPPLIER_ID in (select shipment.SUPPLIER_ID 
+from SUPPLIER where SUPPLY_TYPE in ('Wine', 'Beverages', 'Bakery', 'Coffee'));
+
+update shipment set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','S:IT:rr') where 
+RESTAURANT_ID in (select RESTAURANT_ID 
+from RESTAURANT 
+where chain_name = 'Italobros')and 
+SUPPLIER_ID in (select shipment.SUPPLIER_ID 
+from SUPPLIER where SUPPLY_TYPE in ('Wine', 'Beverages', 'Bakery', 'Coffee'));
+
+
+BEGIN SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+policy_name => 'Employee_OLS_POL',
+schema_name => 'ADMIN',
+table_name => 'SHIPMENT');
+END;
+
+
+-- Policy 6 - EMPLOYED
+
+alter table employee add LABEL_COL number(4);
+
+update employee set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','HS:AG:ad') where  employee_id in (select employee_id from employed where chain_name = 'AriGatto');
+update employee set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','HS:PL:ad') where  employee_id in (select employee_id from employed where chain_name = 'Planeinos Goodos');
+update employee set LABEL_COL = CHAR_TO_LABEL('Employee_OLS_POL','HS:IT:ad') where  employee_id in (select employee_id from employed where chain_name = 'Italobros');
+
+BEGIN SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+policy_name => 'Employee_OLS_POL',
+schema_name => 'ADMIN',
+table_name => 'EMPLOYEE');
+END;
